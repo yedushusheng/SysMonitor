@@ -55,6 +55,7 @@ class ArchInfo(object):
             self.SYS_TYPE = self.Linux
         else:
             self.SYS_TYPE = self.OTHER
+            print("Warnning:Not Support!")
         print(sys_type)
 
 
