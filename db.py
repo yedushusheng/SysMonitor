@@ -7,19 +7,29 @@ import pymysql
 如果不先建立DB则会报错
 '''
 class DBStorage(object):
-
-    def InsertInfo(self):
-        #打开数据库连接
+    # 打开数据库连接
+    def PreConnect(self):
         db = pymysql.connect(
             host="localhost",
             port=3306,
             user="",
             passwd="",
-            db="MONITORDB")
-        #使用cursor()方法创建一个游标对象cursor
+            db="MONITDB"
+        )
+        # 使用cursor()方法创建一个游标对象cursor
         cursor = db.cursor()
+        return db,cursor
+
+    def CloseConnect(self,sql):
+        cursor = self.PreConnect()
+        cursor[0].execute(sql)
+        cursor[1].close()
+
+     #插入数据
+    def InsertInfo(self):
+        insertcursor = self.PreConnect()
         #使用execute()方法执行SQL,如果表存在则删除
-        cursor.execute("DROP TABLE IF EXISTS ARCHINFO")
+        insertcursor.execute("DROP TABLE IF EXISTS ARCHINFO")
 
         #使用预处理语句创建表
         sql = """CREATE TABLE ARCHINFO(
@@ -27,5 +37,12 @@ class DBStorage(object):
                 SYS_BIT INT
                 )"""
 
-        cursor.execute(sql)
-        db.close()
+        self.CloseConnect(sql)
+
+    #查询数据
+    def QueryInfo(self):
+        querycursor = self.PreConnect()
+        #构造查询语句
+        sql = "SELECT * FROM ARCHINFO WHERE SYS_TYPE == str("Windows")"
+        querycursor[0].execute(sql)
+        querycursor[1].close()
