@@ -5,6 +5,7 @@ from net import NetMonitor
 from misc import MiscMonitor
 from temperature import TempMonitor
 from arch import ArchInfo
+from process import NetMonitor
 
 if __name__ == '__main__':
     cpu = CPUMonitor()
@@ -24,6 +25,8 @@ if __name__ == '__main__':
     arch.SystemType()
     arch.SystemInfo()
     arch.PlatformInfo()
+
+    process = NetMonitor()
 
 
 
