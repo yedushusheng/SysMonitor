@@ -1,6 +1,6 @@
 import os,sys,logging
 
-class NetMonitor(object):
+class ProcessMonitor(object):
     def __init__(self,pernic=True):
         self.pernic = pernic
 	
