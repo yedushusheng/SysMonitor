@@ -54,3 +54,7 @@ class CPUMonitor(object):
         print("执行内核进程和中断时间:%f" % systemTime)
         print("CPU处于空闲状态时间:%f" % interruptsTime)
         print("DPC时间(Windows):%f" % dpcTime)
+
+if __name__ == '__main__':
+    cpu = CPUMonitor()
+    cpu.cpuInfo()
