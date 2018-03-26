@@ -43,6 +43,11 @@ class DBStorage(object):
     def QueryInfo(self):
         querycursor = self.PreConnect()
         #构造查询语句
-        sql = "SELECT * FROM ARCHINFO WHERE SYS_TYPE == str("Windows")"
+        sql = "SELECT * FROM ARCHINFO WHERE SYS_TYPE == None"
         querycursor[0].execute(sql)
         querycursor[1].close()
+
+if __name__ == '__main__':
+    db = DBStorage()
+    db.InsertInfo()
+    db.QueryInfo()
