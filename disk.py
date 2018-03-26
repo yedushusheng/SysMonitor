@@ -10,3 +10,7 @@ class DiskMonitor(object):
         diskIO = psutil.disk_io_counters()
         #获取磁盘分区信息
         diskPartition = psutil.disk_usage('/')
+
+if __name__ == '__main__':
+    disk = DiskMonitor()
+    disk.diskInfo()
