@@ -8,7 +8,7 @@ class NetMonitor(object):
 
     #获取网络信息
     def netInfo(self):
-        print("网络信息".center(20,'*'))
+        print("Net information".center(20,'*'))
         #获取网络总IO信息
         netTotalIO = psutil.net_io_counters()
         print(type(netTotalIO))
