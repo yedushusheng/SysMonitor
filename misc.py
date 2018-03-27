@@ -19,7 +19,7 @@ def ModifyTime(time):
 class MiscMonitor(object):
     #获取用户信息
     def userInfo(self):
-        print("用户信息".center(20,'*'))
+        print("user information".center(20,'*'))
         userinfo = psutil.users()
         print(type(userinfo))
         for index in userinfo:
@@ -42,35 +42,35 @@ class MiscMonitor(object):
 
     #获取开机时间
     def bootTime(self):
-        print("开机时间".center(20,'*'))
+        print("Host Start Time".center(20,'*'))
         startTime = psutil.boot_time()
         print(ModifyTime(startTime))
 
     #获取电池信息
     def Battery(self):
-        print("电池监测".center(20,'*'))
+        print("Battery Monitor".center(20,'*'))
         if not hasattr(psutil,"sensors_battery"):
-            return sys.exit("平台不支持")
+            return sys.exit("platform not supported.")
         battery = psutil.sensors_battery()
         if battery is None:
-            return sys.exit("未检测到电池")
+            return sys.exit("no battery checked.")
         #后面的%%是为了输出百分号
-        print("电池: %s%%" %round(battery.percent,2))
+        print("Battery: %s%%" %round(battery.percent,2))
 
         #判断电池是否充满
         def BatteryStatus(percent):
             if(percent < 100):
-                status = "正在充电"
+                status = "In charging"
             else:
-                status = "已充满电"
+                status = "Full charged"
             return status
 
         #判断是否插电
         if battery.power_plugged:
-            print("剩余电池时间:%s" %(SecToHour(battery.secsleft)))
-            print("状态:%s" % (BatteryStatus(battery.percent)))
-            print("插座充电")
+            print("Time left:%s" %(SecToHour(battery.secsleft)))
+            print("BatteryStatus:%s" % (BatteryStatus(battery.percent)))
+            print("Bus Charged")
         else:
-            print("剩余供电时间:%s" % (SecToHour(battery.secsleft)))
-            print("状态:%s" %("未充电"))
-            print("未插入插座")
+            print("Time left:%s" % (SecToHour(battery.secsleft)))
+            print("BatteryStatus:%s" %("Not in charged"))
+            print("Bus not charged")
