@@ -5,3 +5,7 @@ class TempMonitor(object):
         temperature = psutil.sensors_temperatures()
         print(temperature)
         sys.exit()
+
+if __name__ == '__main__':
+	temp = TempMonitor()
+	temp.TempInfo()
